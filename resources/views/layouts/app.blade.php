@@ -17,9 +17,10 @@
             color: #ff6347; /* Tomato color */
         }
         footer {
-            background-color: #343a40;
+            background-color: #2e302f;
             color: white;
             padding: 30px 0;
+            font-size: 1.2rem;
         }
         footer .footer-column {
             margin-bottom: 20px;
@@ -39,12 +40,15 @@
         .navbar-nav .nav-link {
             margin-left: 20px;
             margin-top: 5px;
+            font-size: 1.2rem;
         }
-        .navbar
-        {
-            padding-left: 200px;
-            padding-right: 100px;
+        .navbar {
+         padding-left: 200px;
+          padding-right: 100px;
+        padding-top: 20px; /* navbar এর উপরিভাগে padding বাড়ানো হলো */
+        padding-bottom: 20px; /* navbar এর নিচে padding বাড়ানো হলো */
         }
+
         header
         {
             position: sticky; /* sticky position add kora holo */
@@ -63,7 +67,7 @@
     <header>
         <!-- Your navigation menu -->
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-            <a class="navbar-brand" href="{{url("/")}}">My Site</a>
+            <h2><a class="navbar-brand" href="{{url("/")}}">My Site</a></h2> 
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
