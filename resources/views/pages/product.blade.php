@@ -39,7 +39,7 @@
     <!-- Create Modal -->
     <div class="modal fade" id="createModal" tabindex="-1" aria-labelledby="createModalLabel" aria-hidden="true">
         <div class="modal-dialog">
-            <form action="{{ route('products.store') }}" method="POST" enctype="multipart/form-data">
+            <form id="productForm" action="{{ route('products.store') }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 <div class="modal-content">
                     <div class="modal-header">
@@ -64,30 +64,12 @@
                             <select id="categorySelect" class="form-control" multiple name="categories[]">
                                 <option value="" disabled selected>Select Categories</option>
                                 @foreach ($categories as $category)
-                                    <option value="{{ $category->id }}" 
+                                    <option value="{{ $category->id }}"
                                         @if(in_array($category->id, old('categories', []))) selected @endif>
                                         {{ $category->category_name }}
                                     </option>
                                 @endforeach
                             </select>
-                        </div>
-                        <div class="mb-3">
-                            <label class="form-label">Selected Categories</label>
-                            <div id="selectedCategories" class="d-flex flex-wrap">
-                                @if(old('categories'))
-                                    @foreach(old('categories') as $categoryId)
-                                        @php
-                                            $category = $categories->firstWhere('id', $categoryId);
-                                        @endphp
-                                        @if($category)
-                                            <div class="d-flex align-items-center mb-2" id="category-{{ $category->id }}">
-                                                <span class="badge bg-secondary me-2">{{ $category->category_name }}</span>
-                                                <input type="hidden" name="categories[]" value="{{ $category->id }}">
-                                            </div>
-                                        @endif
-                                    @endforeach
-                                @endif
-                            </div>
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -99,4 +81,40 @@
         </div>
     </div>
 </div>
+
+@endsection
+
+@section('scripts')
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function() {
+        // Handle form submission via AJAX
+        $('#productForm').on('submit', function(e) {
+            e.preventDefault();  // Prevent the default form submission
+
+            var formData = new FormData(this);  // Create a FormData object
+
+            $.ajax({
+                url: $(this).attr('action'),  // Get the form action URL
+                type: 'POST',  // Method of request
+                data: formData,  // Send the form data
+                processData: false,  // Prevent jQuery from processing the data
+                contentType: false,  // Don't set content type (important for file upload)
+                success: function(response) {
+                    // Handle success response
+                    if (response.success) {
+                        $('#createModal').modal('hide');  // Close the modal
+                        alert(response.message);  // Show success message
+                    } else {
+                        alert(response.message);  // Show error message if validation fails
+                    }
+                },
+                error: function(xhr, status, error) {
+                    // Handle error response
+                    alert('Something went wrong. Please try again.');
+                }
+            });
+        });
+    });
+</script>
 @endsection
