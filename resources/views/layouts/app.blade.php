@@ -61,7 +61,7 @@
     <header>
         <!-- Your navigation menu -->
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-            <a class="navbar-brand" href="#">My Site</a>
+            <a class="navbar-brand" href="{{url("/")}}">My Site</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -69,7 +69,7 @@
                 <ul class="navbar-nav">
                     <!-- Left side menu items -->
                     <li class="nav-item">
-                        <a class="nav-link menu-item" href="#"><i class="bi bi-house-door"></i> Home</a>
+                        <a class="nav-link menu-item" href="{{url('/')}}"><i class="bi bi-house-door"></i> Home</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link menu-item" href="#"><i class="bi bi-info-circle"></i> About</a>
