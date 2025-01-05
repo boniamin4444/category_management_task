@@ -55,13 +55,13 @@ class ProductController extends Controller
 
     // app/Http/Controllers/ProductController.php
 
-public function welcome()
-{
-    // প্রোডাক্ট এবং তাদের সম্পর্কিত ক্যাটাগরি নিয়ে আসা
-    $products = Product::with('categories')->get();
-    return view('welcome', compact('products'));
-}
-
+    public function welcome()
+    {
+        // প্রোডাক্ট এবং তাদের সম্পর্কিত ক্যাটাগরি নিয়ে আসা, pagination সহ
+        $products = Product::with('categories')->orderBy('created_at', 'desc')->paginate(12); // এখানে ৯টি প্রোডাক্ট প্রতি পেজে দেখাবে
+        return view('welcome', compact('products'));
+    }
+    
 
     public function update(Request $request, Product $product)
     {
